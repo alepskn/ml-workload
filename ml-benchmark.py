@@ -22,12 +22,12 @@ def main():
     trainset = torchvision.datasets.CIFAR100(root=data_dir, train=True,
                                             download=True, transform=transform)
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
-                                            shuffle=True, num_workers=4)
+                                            shuffle=True, num_workers=0)
 
     testset = torchvision.datasets.CIFAR100(root=data_dir, train=False,
                                         download=True, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,
-                                            shuffle=False, num_workers=4)
+                                            shuffle=False, num_workers=0)
 
     net = models.resnet50(weights=None)
     net.fc = nn.Linear(net.fc.in_features, 100)

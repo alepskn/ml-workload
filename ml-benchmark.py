@@ -15,12 +15,12 @@ def main():
 
     batch_size = 128
 
-    trainset = torchvision.datasets.CIFAR100(root='./data', train=True,
+    trainset = torchvision.datasets.CIFAR100(root='/tmp/data', train=True,
                                             download=True, transform=transform)
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
                                             shuffle=True, num_workers=4)
 
-    testset = torchvision.datasets.CIFAR100(root='./data', train=False,
+    testset = torchvision.datasets.CIFAR100(root='/tmp/data', train=False,
                                         download=True, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,
                                             shuffle=False, num_workers=4)
@@ -49,7 +49,7 @@ def main():
 
             # print statistics
             running_loss += loss.item()
-            if i % 100 == 0:
+            if i % 100 == 99:
                 print(f'[{epoch + 1}, {i + 1:5d}] loss: {running_loss / 100:.3f}')
                 running_loss = 0.0
 

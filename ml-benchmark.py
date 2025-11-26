@@ -40,28 +40,18 @@ def main():
     print("Starting training")
 
     for epoch in range(20):  # loop over the dataset multiple times
-        print("Test")
         running_loss = 0.0
-        print(trainloader.dataset)
-        print(enumerate(trainloader, 0))
         for i, data in enumerate(trainloader, 0):
             # get the inputs; data is a list of [inputs, labels]
             inputs, labels = data
-            print(inputs)
-            print(labels)
             # zero the parameter gradients
             optimizer.zero_grad()
-            print("Getting outputs...")
             # forward + backward + optimize
             outputs = net(inputs)
-            print("Got outputs, getting loss...")
             loss = criterion(outputs, labels)
-            print("Got loss, backward...")
             loss.backward()
-            print("Optimizer...")
             optimizer.step()
             # print statistics
-            print(i%50)
             running_loss += loss.item()
             if i % 50 == 49:
                 print(f'[{epoch + 1}, {i + 1:5d}] loss: {running_loss / 50:.3f}')

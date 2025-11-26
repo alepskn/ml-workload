@@ -35,8 +35,10 @@ def main():
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 
-    for epoch in range(20):  # loop over the dataset multiple times
+    print("Starting training")
 
+    for epoch in range(20):  # loop over the dataset multiple times
+        print("Test")
         running_loss = 0.0
         for i, data in enumerate(trainloader, 0):
             # get the inputs; data is a list of [inputs, labels]
@@ -50,8 +52,8 @@ def main():
             loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
-
             # print statistics
+            print(i%50)
             running_loss += loss.item()
             if i % 50 == 49:
                 print(f'[{epoch + 1}, {i + 1:5d}] loss: {running_loss / 50:.3f}')

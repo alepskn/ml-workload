@@ -30,7 +30,7 @@ def main():
             'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
 
-    net = models.resnet50(pretrained=False)
+    net = models.resnet50(weights=None)
     net.fc = nn.Linear(net.fc.in_features, 10)
 
     criterion = nn.CrossEntropyLoss()

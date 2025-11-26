@@ -4,23 +4,27 @@ import torchvision.transforms as transforms
 import torch.nn as nn
 import torch.optim as optim
 import torchvision.models as models
+import os
 
 #Followed https://docs.pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html tutorial
 
 def main():
     transform = transforms.Compose(
-        [transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
+        [transforms.Resize(224),
+        transforms.ToTensor(),
+        transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))]
     )
 
     batch_size = 128
 
-    trainset = torchvision.datasets.CIFAR100(root='/tmp/data', train=True,
+    data_dir = os.getenv('DATA_DIR', '/tmp/data')
+
+    trainset = torchvision.datasets.CIFAR100(root=data_dir, train=True,
                                             download=True, transform=transform)
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
                                             shuffle=True, num_workers=4)
 
-    testset = torchvision.datasets.CIFAR100(root='/tmp/data', train=False,
+    testset = torchvision.datasets.CIFAR100(root=data_dir, train=False,
                                         download=True, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,
                                             shuffle=False, num_workers=4)
@@ -49,8 +53,8 @@ def main():
 
             # print statistics
             running_loss += loss.item()
-            if i % 100 == 99:
-                print(f'[{epoch + 1}, {i + 1:5d}] loss: {running_loss / 100:.3f}')
+            if i % 50 == 49:
+                print(f'[{epoch + 1}, {i + 1:5d}] loss: {running_loss / 50:.3f}')
                 running_loss = 0.0
 
     print('Finished Training')

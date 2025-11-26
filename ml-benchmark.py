@@ -19,9 +19,11 @@ def main():
 
     data_dir = os.getenv('DATA_DIR', '/tmp/data')
 
-    trainset = torchvision.datasets.CIFAR100(root='/tmp/data', train=True,
+    print(data_dir)
+
+    trainset = torchvision.datasets.CIFAR100(root=data_dir, train=True,
                                             download=True, transform=transform)
-    trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
+    trainloader = torch.utils.data.DataLoader(data_dir, batch_size=batch_size,
                                             shuffle=True, num_workers=4)
 
     testset = torchvision.datasets.CIFAR100(root='/tmp/data', train=False,

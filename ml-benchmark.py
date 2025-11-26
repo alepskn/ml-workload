@@ -42,6 +42,8 @@ def main():
     for epoch in range(20):  # loop over the dataset multiple times
         print("Test")
         running_loss = 0.0
+        print(trainloader.dataset)
+        print(enumerate(trainloader, 0))
         for i, data in enumerate(trainloader, 0):
             # get the inputs; data is a list of [inputs, labels]
             inputs, labels = data

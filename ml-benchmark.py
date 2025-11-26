@@ -23,10 +23,10 @@ def main():
 
     trainset = torchvision.datasets.CIFAR100(root=data_dir, train=True,
                                             download=True, transform=transform)
-    trainloader = torch.utils.data.DataLoader(data_dir, batch_size=batch_size,
+    trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
                                             shuffle=True, num_workers=4)
 
-    testset = torchvision.datasets.CIFAR100(root='/tmp/data', train=False,
+    testset = torchvision.datasets.CIFAR100(root=data_dir, train=False,
                                         download=True, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,
                                             shuffle=False, num_workers=4)

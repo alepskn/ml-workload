@@ -45,14 +45,18 @@ def main():
         for i, data in enumerate(trainloader, 0):
             # get the inputs; data is a list of [inputs, labels]
             inputs, labels = data
-
+            print(inputs)
+            print(labels)
             # zero the parameter gradients
             optimizer.zero_grad()
-
+            print("Getting outputs...")
             # forward + backward + optimize
             outputs = net(inputs)
+            print("Got outputs, getting loss...")
             loss = criterion(outputs, labels)
+            print("Got loss, backward...")
             loss.backward()
+            print("Optimizer...")
             optimizer.step()
             # print statistics
             print(i%50)
